@@ -114,19 +114,27 @@ public class UserService implements CommunityConstant {
             return map;
         }
         password=CommunityUtil.md5(password+user.getSalt());
-        if (user.getPassword().equals(password)){
+        if (!user.getPassword().equals(password)){
             map.put("passwordMsg","密码不正确");
             return map;
         }
+        LoginTicket loginTicket=loginTicketMapper.selectByUserid(user.getId());
+        if (loginTicketMapper.selectByUserid(user.getId())!=null){
+            if (loginTicket.getStatus()!=1&&loginTicket.getExpired().after(new Date()))
+                map.put("ticket",loginTicket.getTicket());
+            return map;
+        }else {
+            loginTicket=new LoginTicket();
+            loginTicket.setUserid(user.getId());
+            loginTicket.setTicket(CommunityUtil.generateUUID());
+            loginTicket.setStatus(0);
+            loginTicket.setExpired(new Date(System.currentTimeMillis()+expiredSeconds*1000));
+            loginTicketMapper.insertLoginTicket(loginTicket);
+            map.put("ticket",loginTicket.getTicket());
+            return map;
+        }
         //生成登录凭证
-        LoginTicket loginTicket=new LoginTicket();
-        loginTicket.setUserid(user.getId());
-        loginTicket.setTicket(CommunityUtil.generateUUID());
-        loginTicket.setStatus(0);
-        loginTicket.setExpired(new Date(System.currentTimeMillis()+expiredSeconds*1000));
-        loginTicketMapper.insertLoginTicket(loginTicket);
-        map.put("ticket",loginTicket.getTicket());
-        return map;
+
     }
     public void logout(String ticket){
         loginTicketMapper.updateStatus(ticket,1);

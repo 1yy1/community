@@ -27,7 +27,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
         if (ticket!=null){
             LoginTicket loginTicket = userService.findLoginTicket(ticket);
             if (loginTicket!=null&&loginTicket.getStatus()==0&&loginTicket.getExpired().after(new Date())){
-                User user = userService.findUserById(loginTicket.getId());
+                User user = userService.findUserById(loginTicket.getUserid());
                 hostHolder.setUser(user);
             }
         }

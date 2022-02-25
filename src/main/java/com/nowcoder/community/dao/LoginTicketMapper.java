@@ -2,6 +2,7 @@ package com.nowcoder.community.dao;
 
 import com.nowcoder.community.entity.LoginTicket;
 import org.apache.ibatis.annotations.*;
+import sun.security.krb5.internal.Ticket;
 
 @Mapper
 public interface LoginTicketMapper {
@@ -19,4 +20,6 @@ public interface LoginTicketMapper {
             "where ticket=#{ticket} "
     })
     int updateStatus(String ticket,int status);
+    @Select({"select ticket,expired from login_ticket where user_id=#{userid}"})
+    LoginTicket selectByUserid(int  userid);
 }
