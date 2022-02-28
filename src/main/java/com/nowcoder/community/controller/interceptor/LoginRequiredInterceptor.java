@@ -18,7 +18,7 @@ public class LoginRequiredInterceptor implements HandlerInterceptor {
     private HostHolder hostHolder;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod){
+        if (handler instanceof HandlerMethod){ //HandlerMethod 是RequestMappingHandlerMapping中的方法，即controller中的方法
             HandlerMethod handlerMethod=(HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             LoginRequired loginRequired = method.getAnnotation(LoginRequired.class);
