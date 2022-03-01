@@ -13,16 +13,16 @@
         from comment
         where status=0
         and entity_type=#{entityType}
-        and enetity_id=#{entityId}
+        and entity_id=#{entityId}
         order by create_time asc
-        limit #{offser},#{limit}
+        limit #{offset},#{limit}
     </select>
     <select id="selectCountByEntity" resultType="java.lang.Integer">
         select count(id)
         from comment
         where status = 0
         and entity_type = #{entityType}
-        and enetity_id = #{entityId}
+        and entity_id = #{entityId}
     </select>
 
 </mapper>

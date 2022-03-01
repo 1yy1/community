@@ -9,8 +9,11 @@ import java.util.Date;
 public class Comment {
     private int id;
     private int userId;
+    //评论的类型
     private int entityType;
+    //帖子的id
     private int  entityId;
+    //评论的目标
     private int targetId;
     private String content;
     private int status;
