@@ -105,7 +105,7 @@ public class SensitiveFilter {
         return sb.toString();
     }
 
-    //判断是否是符号
+    //判断是否是符号,为true时不是文字
     private boolean isSymbol(Character c) {
         return !CharUtils.isAsciiAlphanumeric(c) && (c < 0x2E80 || c > 0x9FFF); //东亚文字范围
     }
