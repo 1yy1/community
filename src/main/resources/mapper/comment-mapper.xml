@@ -27,6 +27,10 @@
         and entity_type = #{entityType}
         and entity_id = #{entityId}
     </select>
+    <select id="selectCommentById" resultType="com.nowcoder.community.entity.Comment">
+        select <include refid="selectFields"></include>
+from comment where id=#{id}
+    </select>
 
     <insert id="insertComment" parameterType="Comment" keyProperty="id">
         insert into comment(<include refid="insertFields"></include>) values(#{userId},#{entityType},#{entityId},#{targetId},#{content},#{status},#{createTime})
