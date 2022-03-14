@@ -9,7 +9,7 @@ import java.util.Date;
 public class Comment {
     private int id;
     private int userId;
-    //评论的类型
+    //评论的类型 1为帖子，2为评论，3为用户
     private int entityType;
     //帖子的id
     private int  entityId;

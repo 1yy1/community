@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class Event {
     private String topic;
-    private int userId;
+    private int userId; //发送人
     private int entityType;
-    private int entityId;
-    private int entityUserId;
+    private int entityId;//帖子id
+    private int entityUserId; //帖子作者
     private Map<String,Object> data=new HashMap<>();
 
     public String getTopic() {

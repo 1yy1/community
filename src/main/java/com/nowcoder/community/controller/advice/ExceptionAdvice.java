@@ -22,7 +22,7 @@ public class ExceptionAdvice {
             logger.error(element.toString());
         }
         String xRequestedWith = request.getHeader("x-requested-with");
-        if ("XMLHttpRequest".equals(xRequestedWith)){
+        if ("XMLHttpRequest".equals(xRequestedWith)){//判断是否是ajax请求
             response.setContentType("application/plain;charset=utf-8");
             PrintWriter writer=response.getWriter();
             writer.write(CommunityUtil.getJSONString(1,"服务器异常！"));
