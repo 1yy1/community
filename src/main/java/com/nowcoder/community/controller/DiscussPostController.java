@@ -160,7 +160,7 @@ public class DiscussPostController implements CommunityConstant {
     @RequestMapping(path = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public String setDelete(int id){
-        discussPostService.updateStatus(id,1);
+        discussPostService.updateStatus(id,2);
         //触发删帖事件
         Event event=new Event().setTopic(TOPIC_DELETE)
                 .setUserId(hostHolder.getUser().getId())
