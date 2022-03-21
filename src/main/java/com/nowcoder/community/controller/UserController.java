@@ -48,12 +48,22 @@ public class UserController implements CommunityConstant {
     @Autowired
     private FollowService followService;
 
+    @Value("${qiniu.key.access}")
+    private String accessKey;
+    @Value("${qiniu.key.secret}")
+    private String secretKey;
+    @Value("${qiniu.bucket.header.name}")
+    private String headerBucketName;
+    @Value("${qiniu.bucket.header.url}")
+    private String headerBucketUrl;
+
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
         return "/site/setting";
     }
 
+    //废弃
     @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadHeader(MultipartFile headerImage, Model model) {
@@ -82,6 +92,7 @@ public class UserController implements CommunityConstant {
         return "redirect:/index";
     }
 
+    //废弃
     @RequestMapping(path = "header/{fileName}", method = RequestMethod.GET)
     public void getHeader(@PathVariable("fileName") String fileName, HttpServletResponse response) {
         //服务器路径

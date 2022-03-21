@@ -29,6 +29,8 @@ public interface CommunityConstant {
     String TOPIC_PUBLISH="publish";
     //主题：删帖
     String TOPIC_DELETE="delete";
+    //主题：分享
+    String TOPIC_SHARE="share";
     //权限：普通用户
     String AUTHORITY_USER="user";
     //权限：管理员
