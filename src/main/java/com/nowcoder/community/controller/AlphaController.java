@@ -6,15 +6,16 @@ import com.nowcoder.community.util.CommunityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -161,5 +162,24 @@ public class AlphaController {
     public String getCookie(@CookieValue("code") String code) {
         System.out.println(code);
         return "get cookie";
+    }
+    @RequestMapping(path = "pdf",method = RequestMethod.GET)
+    public void testpdf(HttpServletResponse response){
+        try {
+      Runtime.getRuntime()
+          .exec(
+              "D:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe https://mail.qq.com/cgi-bin/frame_html?sid=ZuZDHVx6FXdOWglr&r=2f3866b69b6fab65dc2b3d49fd0d86ae D:\\wkhtmltopdf\\wk-pdfs\\2.pdf");
+             ServletOutputStream outputStream = response.getOutputStream();
+
+            FileInputStream inputStream=new FileInputStream(new File("D:\\wkhtmltopdf\\wk-pdfs\\2.pdf"));
+            int len=0;
+            response.setContentType("application/pdf");
+            while ((len=inputStream.read())!=-1){
+                outputStream.write(len);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
