@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-
+//第一次运行程序时，初始化文件路径
 @Configuration
 public class WkConfig {
     private static final Logger logger=LoggerFactory.getLogger(WkConfig.class);
